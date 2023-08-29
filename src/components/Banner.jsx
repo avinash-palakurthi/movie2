@@ -32,7 +32,7 @@ const Banner = () => {
         </div>
       ) : (
         <div
-          className={`h-[40vh] md:h-[70vh] bg-center bg-cover flex items-end`}
+          className={`h-[50vh] sm:h-[90vh] lg:h-[100vh] bg-center bg-cover flex items-end`}
           style={{
             backgroundImage: `url(
 https://image.tmdb.org/t/p/original/t/p/original/${bannerMovie.backdrop_path})`,

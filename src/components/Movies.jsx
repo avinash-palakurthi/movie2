@@ -7,7 +7,10 @@ const Movies = () => {
   //todo: hover/sethover this is for emoji
   const [hovered, setHovered] = useState("");
   //todo: favourites(emoji related)
-const[favourites,setFavourites]=useState("")
+  const [favourites, setFavourites] = useState("");
+
+  //!--------------------------------------
+
   //todo: making Api request
   useEffect(
     function () {
@@ -18,25 +21,26 @@ const[favourites,setFavourites]=useState("")
               pageNum
           )
           .then((res) => {
-            console.table(res.data);
             setMovies(res.data.results);
           });
       })();
     },
     [pageNum]
   );
+  //!--------------------------------------
 
   // todo: pagination handler
-  function previousPage() {
+  const previousPage = () => {
     if (pageNum >= 1) {
       setPageNum(pageNum - 1);
     }
-  }
+  };
 
   // todo: pagination handler
-  function nextPage() {
+  const nextPage = () => {
     setPageNum(pageNum + 1);
-  }
+  };
+  //!--------------------------------------
 
   //todo: emoji show
   const showEmoji = (id) => {
@@ -46,6 +50,22 @@ const[favourites,setFavourites]=useState("")
   const hideEmoji = () => {
     setHovered("");
   };
+  //!--------------------------------------
+  //todo: adding || removing emojis to favourites
+  const addEmoji = (id) => {
+    const newFav = [...favourites, id];
+    setFavourites(newFav);
+  };
+
+  const removeEmoji = (id) => {
+    //* whichever element is !== my id will be removed
+    const filteredFav = favourites.filter((ele) => {
+      return ele !== id;
+    });
+    setFavourites(filteredFav);
+  };
+
+  //!--------------------------------------
 
   return (
     <div className="mt-10 ">
@@ -69,8 +89,7 @@ const[favourites,setFavourites]=useState("")
                 key={movie.id}
                 className="w-[160px] h-[30vh] md:h-[40vh] md:w-[180px] m-4 rounded-xl duration-300 hover:scale-110  bg-center bg-cover flex items-end relative"
                 style={{
-                  backgroundImage: `url(
-https://image.tmdb.org/t/p/original/t/p/original/${movie.poster_path})`,
+                  backgroundImage: `url(https://image.tmdb.org/t/p/original/t/p/original/${movie.poster_path})`,
                 }}
               >
                 {/* emoji  */}
@@ -78,7 +97,25 @@ https://image.tmdb.org/t/p/original/t/p/original/${movie.poster_path})`,
                   className="p-1 bg-gray-800 absolute top-2 right-2 rounded-full"
                   style={{ display: hovered === movie.id ? "block" : "none" }}
                 >
-                  <div className="text-2xl ">😍</div>
+                  {favourites.includes(movie.id) === false ? (
+                    <div
+                      className="text-2xl cursor-pointer "
+                      onClick={() => {
+                        addEmoji(movie.id);
+                      }}
+                    >
+                      😍
+                    </div>
+                  ) : (
+                    <div
+                      className="text-2xl cursor-pointer"
+                      onClick={() => {
+                        removeEmoji(movie.id);
+                      }}
+                    >
+                      ❌
+                    </div>
+                  )}
                 </div>
 
                 {/* movie name/title */}

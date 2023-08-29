@@ -1,19 +1,25 @@
 // import React from 'react'
 import logo from "../assets/download.png";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
-    <div className="flex px-8 py-3  border  bg-white bg-opacity-90 ">
+    <div className=" flex px-8 py-3  border  bg-white  ">
       <div>
         <img src={logo} alt="" />
       </div>
-      <div className="px-9 flex items-center justify-center ">
-        <h2 className="px-8 text-blue-400 font-semibold text-2xl cursor-pointer">
+      <div className="px-2 flex items-center justify-center ">
+        <Link
+          to="/"
+          className="px-3 text-blue-400 font-semibold text-2xl cursor-pointer"
+        >
           Movies
-        </h2>
-        <h2 className="px-8 text-blue-400 font-semibold text-2xl cursor-pointer">
+        </Link>
+        <Link
+          to="/fav"
+          className="px-3 text-blue-400 font-semibold text-2xl cursor-pointer"
+        >
           Favourites
-        </h2>
+        </Link>
       </div>
     </div>
   );
