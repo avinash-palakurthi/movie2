@@ -4,16 +4,11 @@ import Pagination from "./Pagination";
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [pageNum, setPageNum] = useState(1);
-
-  function previousPage() {
-    if (pageNum >= 1) {
-      setPageNum(pageNum - 1);
-    }
-  }
-
-  function nextPage() {
-    setPageNum(pageNum + 1);
-  }
+  //todo: hover/sethover this is for emoji
+  const [hovered, setHovered] = useState("");
+  //todo: favourites(emoji related)
+const[favourites,setFavourites]=useState("")
+  //todo: making Api request
   useEffect(
     function () {
       (function () {
@@ -30,6 +25,28 @@ const Movies = () => {
     },
     [pageNum]
   );
+
+  // todo: pagination handler
+  function previousPage() {
+    if (pageNum >= 1) {
+      setPageNum(pageNum - 1);
+    }
+  }
+
+  // todo: pagination handler
+  function nextPage() {
+    setPageNum(pageNum + 1);
+  }
+
+  //todo: emoji show
+  const showEmoji = (id) => {
+    setHovered(id);
+  };
+  //todo: emoji hide
+  const hideEmoji = () => {
+    setHovered("");
+  };
+
   return (
     <div className="mt-10 ">
       <div className="mb-5 text-3xl font-semibold text-center capitalize">
@@ -41,14 +58,30 @@ const Movies = () => {
         ) : (
           movies.map((movie) => {
             return (
+              //movie card it includes-(poster,movieName,emoji(for adding to Favourites))
               <div
+                onMouseOver={() => {
+                  showEmoji(movie.id);
+                }}
+                onMouseLeave={() => {
+                  hideEmoji(movie.id);
+                }}
                 key={movie.id}
-                className="w-[160px] h-[30vh] md:h-[40vh] md:w-[180px] m-4 rounded-xl duration-300 hover:scale-110  bg-center bg-cover flex items-end"
+                className="w-[160px] h-[30vh] md:h-[40vh] md:w-[180px] m-4 rounded-xl duration-300 hover:scale-110  bg-center bg-cover flex items-end relative"
                 style={{
                   backgroundImage: `url(
 https://image.tmdb.org/t/p/original/t/p/original/${movie.poster_path})`,
                 }}
               >
+                {/* emoji  */}
+                <div
+                  className="p-1 bg-gray-800 absolute top-2 right-2 rounded-full"
+                  style={{ display: hovered === movie.id ? "block" : "none" }}
+                >
+                  <div className="text-2xl ">😍</div>
+                </div>
+
+                {/* movie name/title */}
                 <div className="w-full p-2 text-xl text-center text-white uppercase bg-slate-800 bg-opacity-80 rounded-b-xl font-extralight">
                   {movie.title || movie.name}
                 </div>

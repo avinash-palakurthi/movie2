@@ -3,7 +3,7 @@ import logo from "../assets/download.png";
 
 const Navbar = () => {
   return (
-    <div className="flex px-8 py-3  border top-0 sticky bg-white bg-opacity-90 ">
+    <div className="flex px-8 py-3  border  bg-white bg-opacity-90 ">
       <div>
         <img src={logo} alt="" />
       </div>
