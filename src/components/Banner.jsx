@@ -1,14 +1,48 @@
-// import React from 'react'
-// import image from "../assets/image.jpg";
-import "./banner.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Oval } from "react-loader-spinner";
+
 const Banner = () => {
+  let [bannerMovie, setBannerMovie] = useState("");
+
+  useEffect(function () {
+    (function () {
+      axios
+        .get(
+          "https://api.themoviedb.org/3/trending/all/week?api_key=1b0169e8e65c49d31c1d7f8aa31db304&page=5"
+        )
+        .then((res) => {
+          console.table(res.data);
+          setBannerMovie(res.data.results[0]);
+        });
+    })();
+  }, []);
   return (
     <>
-      <div className="bg-banner h-[40vh] bg-center bg-cover flex items-end">
-        <div className="text-white bg-slate-900 p-4 bg-opacity-60 text-2xl text-center uppercase font-semibold w-full">
-          M3gan
+      {bannerMovie === "" ? (
+        <div className="flex justify-center">
+          <Oval
+            height="80"
+            width="80"
+            radius="9"
+            color="gray"
+            secondaryColor="gray"
+            ariaLabel="loading"
+          />
         </div>
-      </div>
+      ) : (
+        <div
+          className={`h-[40vh] md:h-[70vh] bg-center bg-cover flex items-end`}
+          style={{
+            backgroundImage: `url(
+https://image.tmdb.org/t/p/original/t/p/original/${bannerMovie.backdrop_path})`,
+          }}
+        >
+          <div className="text-xl md:text-3xl text-white bg-gray-900 bg-opacity-60 p-4 text-center w-full">
+            {bannerMovie.title || bannerMovie.name}
+          </div>
+        </div>
+      )}
     </>
   );
 };
