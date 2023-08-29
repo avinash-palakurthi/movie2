@@ -1,19 +1,35 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Pagination from "./Pagination";
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  useEffect(function () {
-    (function () {
-      axios
-        .get(
-          "https://api.themoviedb.org/3/trending/all/week?api_key=1b0169e8e65c49d31c1d7f8aa31db304&page=3"
-        )
-        .then((res) => {
-          console.table(res.data);
-          setMovies(res.data.results);
-        });
-    })();
-  }, []);
+  const [pageNum, setPageNum] = useState(1);
+
+  function previousPage() {
+    if (pageNum >= 1) {
+      setPageNum(pageNum - 1);
+    }
+  }
+
+  function nextPage() {
+    setPageNum(pageNum + 1);
+  }
+  useEffect(
+    function () {
+      (function () {
+        axios
+          .get(
+            "https://api.themoviedb.org/3/trending/all/week?api_key=1b0169e8e65c49d31c1d7f8aa31db304&page=" +
+              pageNum
+          )
+          .then((res) => {
+            console.table(res.data);
+            setMovies(res.data.results);
+          });
+      })();
+    },
+    [pageNum]
+  );
   return (
     <div className="mt-10 ">
       <div className="mb-5 text-3xl font-semibold text-center capitalize">
@@ -41,6 +57,11 @@ https://image.tmdb.org/t/p/original/t/p/original/${movie.poster_path})`,
           })
         )}
       </div>
+      <Pagination
+        pageNum={pageNum}
+        previousPage={previousPage}
+        nextPage={nextPage}
+      />
     </div>
   );
 };

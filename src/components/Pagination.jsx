@@ -1,18 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 
-const Pagination = () => {
-  const [pageNum, setPageNum] = useState(1);
-
-  function previousPage() {
-    if (pageNum >= 1) {
-      setPageNum(pageNum - 1);
-    }
-  }
-
-  function nextPage() {
-    setPageNum(pageNum + 1);
-  }
-
+const Pagination = (props) => {
+  let { pageNum, previousPage, nextPage } = props;
   return (
     <div className="flex justify-center pb-4 my-4 ">
       <div
