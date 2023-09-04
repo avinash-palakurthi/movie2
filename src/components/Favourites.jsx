@@ -8,6 +8,8 @@ const Favourites = () => {
       genre: "Action",
       popularity: 6,
       genreID: 1,
+      poster:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Akhanda_Poster.jpg/220px-Akhanda_Poster.jpg",
     },
     {
       movieName: "Project-K",
@@ -16,6 +18,8 @@ const Favourites = () => {
       genre: "Sci-Fi",
       popularity: 10,
       genreID: 2,
+      poster:
+        "https://www.hindustantimes.com/ht-img/img/2023/07/19/550x309/prabhas_1689761499160_1689761499895.jpg",
     },
     {
       movieName: "jailer",
@@ -24,6 +28,8 @@ const Favourites = () => {
       genre: "Action",
       popularity: 7,
       genreID: 1,
+      poster:
+        "https://upload.wikimedia.org/wikipedia/en/c/cb/Jailer_2023_Tamil_film_poster.jpg",
     },
     {
       movieName: "dune",
@@ -32,6 +38,8 @@ const Favourites = () => {
       genre: "Sci-Fi",
       popularity: 6,
       genreID: 2,
+      poster:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Dune_%282021_film%29.jpg/220px-Dune_%282021_film%29.jpg",
     },
   ];
   return (
@@ -112,8 +120,8 @@ const Favourites = () => {
                 <tr className="hover:bg-gray-50" key={movie.id}>
                   <th className="flex  items-center  px-6 py-4 font-normal text-gray-900">
                     <img
-                      className="h-[6rem] w-[12rem]  object-cover object-center object-fit pr-5"
-                      src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      className="h-[18rem] w-[15rem]  object-cover object-center pr-5"
+                      src={movie.poster}
                       alt=""
                     />
 
