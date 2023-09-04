@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Pagination from "./Pagination";
+
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [pageNum, setPageNum] = useState(1);
